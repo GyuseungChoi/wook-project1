@@ -191,3 +191,80 @@ void descending_order() {
 	   printf("%d. %s\n", k+1, c_to_string(p)) ;
 	}
 }
+
+void c_update(T_Record* p, int price, char* ct, int m, int d) {
+	p->price = price ;
+	strcpy(p->category, ct) ;
+	p->month = m ;
+	p->day = d ;
+}
+
+T_Record* c_search_by_category(char* ct) {
+	int i ;
+	for(i = 0 ; i < MAX_CONSUME ; i++) {
+		if(consume[i] && strcmp(consume[i]->category, ct) == 0) return consume[i] ;
+	}
+	return NULL ;
+}
+
+void c_update_category(char* ct, char* ct2) {
+	T_Record* consume[MAX_CONSUME] ;
+	c_get_all(consume) ;
+	int size = c_count() ;
+
+	for(int i = 0 ; i < size ; i++) {
+		if(consume[i] && strcmp(consume[i]->category, ct) == 0){
+			T_Record* p = c_search_by_category(ct) ;
+			c_getcategory(p) ;
+			strcpy(p->category, ct2) ;
+		}
+	}
+}
+
+T_Record* c_search_by_month(int m) {
+	int i ;
+	for(i = 0 ; i < MAX_CONSUME ; i++) {
+		if(consume[i] && consume[i]->month == m) return consume[i] ;
+	}
+	return NULL ;
+}
+
+void c_update_month(int m, int m2) {
+	T_Record* consume[MAX_CONSUME] ;
+	c_get_all(consume) ;
+	int size = c_count() ;
+
+	for(int i = 0 ; i < size ; i++) {
+		if(consume[i] && consume[i]->month == m) {
+			T_Record* p = c_search_by_month(m) ;
+			c_getmonth(p) ;
+			p->month = m2 ;
+		}
+	}
+}
+
+T_Record* c_search_by_day(int m, int d) {
+	int i ;
+	for(i = 0 ; i < MAX_CONSUME ; i++) {
+		if(consume[i] && ((consume[i]->month == m)&&(consume[i]->day == d)))  return consume[i] ;
+	}
+	return NULL ;
+}
+
+void c_update_day(int m, int d, int m2, int d2) {
+	T_Record* consume[MAX_CONSUME] ;
+	c_get_all(consume) ;
+	int size = c_count() ;
+
+	for(int i = 0 ; i < size ; i++) {
+		if(consume[i] && ((consume[i]->month == m)&&(consume[i]->day == d))) {
+			T_Record* p = c_search_by_month(m) ;
+			c_getmonth(p) ;
+			p->month = m2 ;
+			T_Record* p2 = c_search_by_day(m, d) ;
+			c_getday(p) ;
+			p->day = d2 ;
+		}
+	}
+}
+

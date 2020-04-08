@@ -1,13 +1,13 @@
 #include "consume.h"
 
-void create_record() ; // 지출내용을 입력하는 함수
-void content_read_record() ; // 특정 지출내용(content) 검색시 상세정보 출력 함수
-void part_read_record() ; // 특정 범주, 월, 날짜 입력시 해당정보 출력 함수
-void all_read_record() ; // 모든 소비리스트를 출력해주는 함수
-void report_read_record() ; // 월별 지출금액, 총 지출금액 보고서
-void price_arrangement() ; // 총 지출내용 중 비싼금액부터 싼금액까지 정렬 보고서
-//void content_update_record() ; // 특정 지출내용의 카테고리, 가격, 날짜를 수정하는 함수
-//void part_update_record() ; // 특정 범주, 월, 날짜의 내용 입력시 해당정보를 전부 수정하는 함수
+void create_record() ;
+void content_read_record() ;
+void part_read_record() ;
+void all_read_record() ;
+void report_read_record() ;
+void price_arrangement() ;
+void content_update_record() ;
+void part_update_record() ;
 //void content_delete_record() ; // 특정 지출에 관한 모든 정보를 삭제하는 함수
 //void part_delete_record() ; // 특정 범주, 월, 날짜의 내용을 모두 삭제하는 함수
 
@@ -37,6 +37,12 @@ int main() {
 				break ;
 			case 6:
 				price_arrangement() ;
+				break ;
+			case 7:
+				content_update_record() ;
+				break ;
+			case 8:
+				part_update_record() ;
 				break ;
 			case 0:
 			default:
@@ -165,4 +171,66 @@ void report_read_record() {
 	}
 
 	printf("\n총 소비액 : %d원\n", a_sum) ;
+}
+
+void content_update_record() {
+	char content[20] ;
+
+	printf("Enter a content > ") ;
+	scanf("%s", content) ;
+
+	T_Record* consume = c_search_by_content(content);
+
+	if(c_search_by_content(content)) {
+		printf("Enter a update info.\n") ;
+		c_getprice(consume) ;
+		printf("Price : ") ; scanf("%d", &consume->price) ;
+		c_getcategory(consume) ;
+		printf("Category : ") ; scanf("%s", consume->category) ;
+		c_getmonth(consume) ;
+		printf("Month : ") ; scanf("%d", &consume->month) ;
+		c_getday(consume) ;
+		printf("Day : ") ; scanf("%d", &consume->day) ;
+
+		c_update(consume, consume->price, consume->category, consume->month, consume->day) ;
+		return ;
+	}
+	printf("존재하지 않는 내용입니다.\n") ;
+}
+
+void part_update_record() {
+	int menu, m, m2, d, d2 ;
+	char ct[20], ct2[20] ;
+
+	while(1){
+		printf("\n어느 정보를 수정하시겠습니까?\n") ;
+		printf("1.Category 2.Month 3.Day 0.Exit > ") ;
+		scanf("%d", &menu) ;
+	switch(menu) {
+		case 1:
+			printf("Category > ") ;
+			scanf("%s", ct) ;
+			printf("Categroy change > ") ;
+			scanf("%s", ct2) ;
+			c_update_category(ct, ct2) ;			
+			break ;
+		case 2:
+			printf("Month > ") ;
+			scanf("%d", &m) ;
+			printf("Month chage > ") ;
+			scanf("%d", &m2) ;
+			c_update_month(m, m2) ;
+			break ;
+		case 3:
+			printf("Month and day input > ") ;
+			scanf("%d %d", &m, &d) ;
+			printf("Month and day change > ") ;
+			scanf("%d %d", &m2, &d2) ;
+			c_update_day(m, d, m2, d2) ;			
+			break ;
+		case 0:
+		default:
+			return ;
+		}
+	}
 }
