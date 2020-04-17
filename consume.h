@@ -40,5 +40,5 @@ void c_delete_category(char* ct) ;
 void c_delete_month(int m) ;
 void c_delete_day(int m, int d) ;
 void all_delete(T_Record* p) ;
-void s_init();
-char* s_to_string_save(T_Record* p);
+void c_init();
+char* c_to_string_save(T_Record* p);

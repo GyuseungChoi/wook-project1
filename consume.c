@@ -324,7 +324,7 @@ void c_delete_day(int m, int d) {
 	}
 }
 
-void s_init(){
+void c_init(){
     int i;
     for(i=0; i<MAX_CONSUME; i++) {
         if(consume[i]!=NULL) {
@@ -336,7 +336,7 @@ void s_init(){
 
 }
 
-char* s_to_string_save(T_Record* p) {
+char* c_to_string_save(T_Record* p) {
     static char str[80];
     sprintf(str, "%s %d %s %d %d", p->content, p->price, p->category, p->month, p->day);
     return str;

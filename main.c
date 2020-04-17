@@ -319,7 +319,7 @@ void file_load() {
 	printf("1.YES 0.N0 > ") ;
 	scanf("%d", &menu) ;
 	if(menu == 0) return ;
-	s_init() ;
+	c_init() ;
 
 	FILE* f = fopen ("consume.txt", "r") ;
 	char content[40], category[20] ;
@@ -353,7 +353,7 @@ void file_save() {
 	c_get_all(records);
 	for(int i=0; i<size; i++){
 		T_Record* p = records[i];
-		fprintf(f,"%s\n", s_to_string_save(p));
+		fprintf(f,"%s\n", c_to_string_save(p));
 	}
 	fclose(f);
 }
