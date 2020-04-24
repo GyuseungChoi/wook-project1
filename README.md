@@ -19,6 +19,9 @@ index와 일치하였을때, 그 index의 모든 정보를 출력하는 방식�
 ▶file_save ▶해당 기능은 현재 consume에 있는 데이터를 for문으로 해당 리스트의 size까지 반복문을 돌며 각각의 구조체 내용을 입력 받아 txt파일을 만들도록 구현하였습니다.
 
 Make 방법은 가장 일방적이게 구현하였습니다.(윈도우환경)
+
 Make main.exe 실행파일 생성
+
 Make main.exe_debug 디버깅 실행파일 생성
+
 Make clean 실행파일 삭제
