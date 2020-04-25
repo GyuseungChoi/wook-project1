@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -g -Wall
-TARGETS = main.exe
+TARGETS = main
 OBJECTS = main.c consume.o
 .SUFFIXES = .c .o
 main.exe_debug : $(TARGETS)
